@@ -58,14 +58,3 @@ document.querySelector('#searchInput').addEventListener('keypress', function(e) 
         zoekPokemon(e.target.value);
     }
 });
-
-box.innerHTML = `
-<div class="pokemon-card">
-    <h2>${data.name}</h2>
-    <img id="pokemonImg" src="${normalSprite}" alt="${data.name}">
-    <p><strong>Types:</strong> ${types}</p>
-    <h3>Stats:</h3>
-    <ul>${statsHTML}</ul>
-    <button id="toggleShiny">✨shiny✨</button>
-</div>
-`;
