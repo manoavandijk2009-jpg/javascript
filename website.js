@@ -31,7 +31,7 @@ async function zoekPokemon(naamOfId) {
                 <h3>Stats:</h3>
                 <ul style="list-style:none; padding:0;">${statsHTML}</ul>
 
-                <button id="toggleShiny">✨shiny✨</button>
+                <button id="toggleShiny">Shiny</button>
             </div>
         `;
 
