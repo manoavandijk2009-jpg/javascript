@@ -3,32 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <title>JavaScript hoofdstuk 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="website.css">
+    <style>
+        body, p, button {
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        p {
+            font-size: 350%;
+            text-align: center;
+            color: #ff3e96;
+            text-shadow: 2px 2px 5px #fff, 4px 4px 10px #ffb6c1;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #a0e7e5;
+        }
+
+        input, button {
+            font-size: 1.4em;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: none;
+            margin: 10px;
+            outline: none;
+        }
+
+        input {
+            width: 250px;
+            text-align: center;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #ff69b4;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #ffb6c1;
+        }
+
+        #box1 {
+            margin-top: 20px;
+            max-width: 350px;
+            width: 90%;
+        }
+
+        #box1 p, #box1 ul li {
+            font-family: sans-serif;
+            font-size: 1em;
+        }
+
+        #box1 h2, #box1 h3 {
+            font-family: 'Bubblegum Sans', cursive;
+            color: #ff1493;
+            text-shadow: 2px 2px 5px #fff;
+            margin: 10px 0;
+        }
+
+        .pokemon-card {
+            .pokemon-card img {
+                text-align: center;
+                background-color: #ffe4e1;
+                padding: 20px;
+                border-radius: 30px;
+                box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+            }
+        }
+
+        .pokemon-card button {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+            margin-top: 10px;
+            background-color: #ff69b4;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .pokemon-card button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #ffb6c1;
+        }
+
+    </style>
 </head>
 <body>
-<div id="box1" class="box"></div>
-<div id="box2" class="box"></div>
-<div id="box3" class="box"></div>
-<style>
-    #box1 {
-    background-color: black;
-    margin-left: 30%;
-    }
-    #box2 {background-color: saddlebrown;
-        margin-left: 20%;
-    }
-    body{background-color: lightskyblue}
-
-    p{color: greenyellow}
-    h1{color: orangered}
-    h2{color: blueviolet}
-    .box {
-    height: 200px;
-    width: 200px;
-    margin-top: 300px;
-    float: left;
-    }
-    </style>
+<p>POKEMON SEARCH ENGINE</p>
+<input type="text" id="searchInput" placeholder="Search a Pokemon...">
+<button id="searchBtn">Search</button>
+<div id="box1"></div>
 <script src="website.js"></script>
 </body>
 </html>

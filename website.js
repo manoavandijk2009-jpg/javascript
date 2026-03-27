@@ -1,25 +1,71 @@
-window.addEventListener("load", function () {
-    console.log("De pagina is geladen!");
-});
+async function zoekPokemon(naamOfId) {
+    const box = document.querySelector('#box1');
 
-document.querySelector('#box1').addEventListener('click', function() {
-    console.log("Ooooh je mag niet klikken!");
-    document.querySelector('#box2').innerHTML = "<h1>Dit is nu</h1><p>de tekst in Box Twee.</p>";
-});
-document.querySelector('#box2').addEventListener('click', function() {
-    document.querySelector('#box1').innerHTML = "<h2>welkom wereld hallo mars.</h2>";
-    console.log("Ooooh je mag niet klikken!")});
+    box.innerHTML = `<p style="text-align:center;">⏳ Loading...</p>`;
 
-let gebruiker= {
-    "naam": "manoa",
-    "leeftijd": 17,
-    "hobbys": [
-        "gamen",
-        "slapen",
-        "eten"
-    ],
-    "blijft laat op maar houdt wel van slapen": true,
+    try {
+        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${naamOfId.toLowerCase()}`);
+
+        if (!response.ok) {
+            throw new Error("Pokemon niet gevonden");
+        }
+
+        let data = await response.json();
+
+        let normalSprite = data.sprites.front_default;
+        let shinySprite = data.sprites.front_shiny;
+
+        let types = data.types.map(t => t.type.name).join(", ");
+
+        let statsHTML = data.stats.map(stat => {
+            return `<li>${stat.stat.name}: ${stat.base_stat}</li>`;
+        }).join("");
+
+        box.innerHTML = `
+            <div style="text-align:center;">
+                <h2>${data.name}</h2>
+                <img id="pokemonImg" src="${normalSprite}" alt="${data.name}">
+                
+                <p><strong>Types:</strong> ${types}</p>
+
+                <h3>Stats:</h3>
+                <ul style="list-style:none; padding:0;">${statsHTML}</ul>
+
+                <button id="toggleShiny">✨shiny✨</button>
+            </div>
+        `;
+
+        let shiny = false;
+        document.querySelector('#toggleShiny').addEventListener('click', function () {
+            let img = document.querySelector('#pokemonImg');
+            shiny = !shiny;
+            img.src = shiny ? shinySprite : normalSprite;
+        });
+
+    } catch (error) {
+        box.innerHTML = `<p style="text-align:center;">Pokemon not found!</p>`;
+        console.error(error);
+    }
 }
 
-document.querySelector('#box3').innerHTML = "<h2>burh</h2>"
-    console.log(gebruiker["naam"]);
+document.querySelector('#searchBtn').addEventListener('click', function() {
+    let value = document.querySelector('#searchInput').value;
+    zoekPokemon(value);
+});
+
+document.querySelector('#searchInput').addEventListener('keypress', function(e) {
+    if (e.key === "Enter") {
+        zoekPokemon(e.target.value);
+    }
+});
+
+box.innerHTML = `
+<div class="pokemon-card">
+    <h2>${data.name}</h2>
+    <img id="pokemonImg" src="${normalSprite}" alt="${data.name}">
+    <p><strong>Types:</strong> ${types}</p>
+    <h3>Stats:</h3>
+    <ul>${statsHTML}</ul>
+    <button id="toggleShiny">✨shiny✨</button>
+</div>
+`;
